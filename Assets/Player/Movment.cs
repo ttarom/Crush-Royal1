@@ -9,11 +9,15 @@ public class Movment : MonoBehaviour {
     [Tooltip("have a smooth movement vs avatar jumps from one position to the other")]
     public bool useSmoothRide;
     public Renderer rend;
-    public Color altColor = Color.green;
+    public Color GreenColor = new Color();
+    
+
+
 
     // Use this for initialization
     void Start () {
         rend = GetComponent<Renderer>();
+        
         //rend.material.color = altColor;
 
     }
@@ -66,12 +70,29 @@ public class Movment : MonoBehaviour {
         
         if (other.tag == "GreenFloor")
         {
-           // if (rend.material.color != "RGBA(0.000, 1.000, 0.000, 1.000)")
-           // {
-           //     Debug.Log("I collide with something ");
-          //  }
+            if (rend.material.color != other.gameObject.GetComponent<Renderer>().material.color)
+            {
+                Debug.Log("I collide with something ");
+            }
+        }
+        if (other.tag == "BlueFloor")
+        {
+            if (rend.material.color != other.gameObject.GetComponent<Renderer>().material.color)
+            {
+                Debug.Log("I collide with something ");
+            }
+        }
+        if (other.tag == "RedFloor")
+        {
+            if (rend.material.color != other.gameObject.GetComponent<Renderer>().material.color)
+            {
+                Debug.Log("I collide with something ");
+            }
         }
     }
+
+
+
 
 
     public void SetColorToBlue()
@@ -79,9 +100,9 @@ public class Movment : MonoBehaviour {
         rend.material.color = Color.blue;
     }
 
-    public void SetColorToGreen()
+    public void SetColorToGreen(Collider other)
     {
-        rend.material.color = Color.green;
+        rend.material.color = other.gameObject.GetComponent<Renderer>().material.color;
     }
 
     public void SetColorToBlack()
@@ -99,6 +120,10 @@ public class Movment : MonoBehaviour {
         rend.material.color = Color.red;
     }
 
+    public void SetColorToGreenq()
+    {
+        rend.material.color = Color.green;
+    }
 
 
 
