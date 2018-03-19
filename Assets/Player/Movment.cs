@@ -10,21 +10,26 @@ public class Movment : MonoBehaviour {
     public bool useSmoothRide;
     public Renderer rend;
     public Color GreenColor = new Color();
+    public float CurrentHealth;
+    public float MaxHealth;
     //Define Enum
     public enum Props_Enum { Player_BLue, Player_BLack, Player_Yellow, Player_Red, Player_Green };
     
     //This what you need to show in the inspector.
     public Props_Enum Current_props;
-    public string Current_Floor;
+    private string Current_Floor;
+    public Slider HealthBar;
 
 
 
 
     // Use this for initialization
     void Start () {
+        CurrentHealth = MaxHealth;
         rend = GetComponent<Renderer>();
         rend.material.color = Color.green;
         Current_Floor = "GreenFloor";
+        HealthBar.value =  CalaulateDamage();
         //rend.material.color = altColor;
 
     }
@@ -33,7 +38,7 @@ public class Movment : MonoBehaviour {
     void Update()
     {
 
-        Hit_object();
+        Deal_Damage(1);
         transform.Translate(Vector3.forward * Time.deltaTime * speedPlayer);
 
         //controlling the player left and right
@@ -67,7 +72,7 @@ public class Movment : MonoBehaviour {
             }
         }
 
-        Hit_object();
+        
     }
 
 
@@ -76,27 +81,28 @@ public class Movment : MonoBehaviour {
     {
 
         Current_Floor = other.gameObject.tag;
-        Hit_object();
-
+        Deal_Damage(6);
 
     }
 
 
-
-    public void Hit_object()
+ 
+    public void Deal_Damage(float DamageValue)
     {
         if (Current_Floor == "RedFloor")
         {
             if (Current_props != Props_Enum.Player_Red)
             {
-                Debug.Log("I colide something else22222");
+                CurrentHealth -= DamageValue;
+                HealthBar.value = CalaulateDamage();
             }
         }
         if (Current_Floor == "BlueFloor")
         {
             if (Current_props != Props_Enum.Player_BLue)
             {
-                Debug.Log("I colide something else1111");
+                CurrentHealth -= DamageValue;
+                HealthBar.value = CalaulateDamage();
             }
         }
         if (Current_Floor == "GreenFloor")
@@ -105,10 +111,16 @@ public class Movment : MonoBehaviour {
 
             {
 
-                Debug.Log("I colide something else33333");
+                CurrentHealth -= DamageValue;
+                HealthBar.value = CalaulateDamage();
 
             }
         }
+    }
+
+    float CalaulateDamage()
+    {
+        return CurrentHealth / MaxHealth;
     }
 
     public void SetColorToBlue()
