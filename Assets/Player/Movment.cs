@@ -10,6 +10,11 @@ public class Movment : MonoBehaviour {
     public bool useSmoothRide;
     public Renderer rend;
     public Color altColor = Color.green;
+    //Define Enum
+    public enum PropsEnum { Player_Blue, Player_Green, Player_Red, Player_Black, Player_Yellow };
+
+    //This is what you need to show in the inspector.
+    public PropsEnum Current_props;
 
     // Use this for initialization
     void Start () {
@@ -66,10 +71,10 @@ public class Movment : MonoBehaviour {
         
         if (other.tag == "GreenFloor")
         {
-           // if (rend.material.color != "RGBA(0.000, 1.000, 0.000, 1.000)")
-           // {
-           //     Debug.Log("I collide with something ");
-          //  }
+            if (Current_props != PropsEnum.Player_Green)
+            {
+                Debug.Log("I collide with something ");
+            }
         }
     }
 
@@ -77,26 +82,31 @@ public class Movment : MonoBehaviour {
     public void SetColorToBlue()
     {
         rend.material.color = Color.blue;
+        Current_props = PropsEnum.Player_Blue;
     }
 
     public void SetColorToGreen()
     {
         rend.material.color = Color.green;
+        Current_props = PropsEnum.Player_Green;
     }
 
     public void SetColorToBlack()
     {
         rend.material.color = Color.black;
+        Current_props = PropsEnum.Player_Black;
     }
 
     public void SetColorToYellow()
     {
         rend.material.color = Color.yellow;
+        Current_props = PropsEnum.Player_Yellow;
     }
 
     public void SetColorToRed()
     {
         rend.material.color = Color.red;
+        Current_props = PropsEnum.Player_Red;
     }
 
 
