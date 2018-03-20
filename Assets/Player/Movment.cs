@@ -13,6 +13,7 @@ public class Movment : MonoBehaviour
     public Color GreenColor = new Color();
     public float CurrentHealth;
     public float MaxHealth;
+    public float JumpPower;
     //Define Enum
     public enum Props_Enum { Player_BLue, Player_BLack, Player_Yellow, Player_Red, Player_Green };
 
@@ -74,7 +75,13 @@ public class Movment : MonoBehaviour
                 transform.Translate(Vector3.right);
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            
+            
 
+        }
+       
 
     }
 
@@ -149,35 +156,40 @@ public class Movment : MonoBehaviour
         return CurrentHealth / MaxHealth;
     }
 
-    public void SetColorToBlue()
+ 
+
+    public void SetEnum(int enumIndex)
     {
-        rend.material.color = Color.blue;
-        Current_props = Props_Enum.Player_BLue;
+        Current_props = (Props_Enum)enumIndex;
+        SetUIByEnum();
     }
 
-    public void SetColorToGreen()
+    private void SetUIByEnum()
     {
-        rend.material.color = Color.green;
-        Current_props = Props_Enum.Player_Green;
+        switch(Current_props)
+        {
+            case Props_Enum.Player_BLue:
+                rend.material.color = Color.blue;
+                break;
+            case Props_Enum.Player_BLack:
+                rend.material.color = new Color(0.859f, 0.404f, 0.827f);
+                break;
+            case Props_Enum.Player_Yellow:
+                rend.material.color = Color.yellow;
+                break;
+            case Props_Enum.Player_Red:
+                rend.material.color = Color.red;
+                break;
+            case Props_Enum.Player_Green:
+                rend.material.color = Color.green;
+                break;
+            default:
+                rend.material.color = new Color(0.859f, 0.404f, 0.827f);
+                break;
+        }
     }
 
-    public void SetColorToBlack()
-    {
-        rend.material.color = new Color(0.859f, 0.404f, 0.827f);
-        Current_props = Props_Enum.Player_BLack;
-    }
 
-    public void SetColorToYellow()
-    {
-        rend.material.color = Color.yellow;
-        Current_props = Props_Enum.Player_Yellow;
-    }
-
-    public void SetColorToRed()
-    {
-        rend.material.color = Color.red;
-        Current_props = Props_Enum.Player_Red;
-    }
 
 
 
