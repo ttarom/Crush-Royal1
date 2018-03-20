@@ -10,11 +10,19 @@ public class Movment : MonoBehaviour {
     public bool useSmoothRide;
     public Renderer rend;
     public Color altColor = Color.green;
+    public float HP;
+    public float StartTime;
+    public float TimeStamp;
+    public Animator PlayerAnimator;
+
+
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         rend = GetComponent<Renderer>();
         //rend.material.color = altColor;
+        
 
     }
 
@@ -54,16 +62,54 @@ public class Movment : MonoBehaviour {
             {
                 transform.Translate(Vector3.right);
             }
+
+            
+
         }
 
-        
+       // if (GapTime == true)
+        {
+           // if (TimeStamp < (StartTime - 1))
+            {
+                
+                //this.gameObject.transform.position = Position;
+               // GetComponent<Rigidbody>().useGravity = false;
+              //  GapTime = false;
+                
+
+            }
+        }
+       
+        StartTime = Time.time;
+
     }
 
 
 
     public void OnTriggerEnter(Collider other)
     {
-        
+
+        if (other.tag == "Bluff")
+        {
+            Debug.Log("Bluff");
+            HP = HP + 1;
+
+        }
+
+        if (other.tag == "Abyss")
+        {
+            Debug.Log("Abyss");
+            HP = HP + 1;
+            TimeStamp = StartTime;
+            PlayerAnimator.SetTrigger("Fall");
+
+
+
+
+
+        }
+
+
         if (other.tag == "GreenFloor")
         {
            // if (rend.material.color != "RGBA(0.000, 1.000, 0.000, 1.000)")

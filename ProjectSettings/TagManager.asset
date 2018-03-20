@@ -7,6 +7,8 @@ TagManager:
   - GreenFloor
   - BlueFloor
   - RedFloor
+  - Abyss
+  - Bluff
   layers:
   - Default
   - TransparentFX
